@@ -1,0 +1,10 @@
+__pycache__
+.idea/
+.svn/
+/static/
+config/localsettings.py
+config/localsettings.py.template
+/logs/*.log
+venv/
+venv2/
+db.sqlite3
