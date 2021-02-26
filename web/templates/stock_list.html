@@ -1,0 +1,106 @@
+
+{% extends "base.html"%}
+
+{% block title %}Состав портфеля{% endblock  %}
+
+{% block content %}
+    <H2>Состав портфеля</H2>
+    <H3>{{total_cost}}</H3>
+
+   <table class="table">
+       <thead>
+            <th><b>Тикер</b></th>
+            <th><b>Количество</b></th>
+            <th><b>Средняя цена покупки</b></th>
+            <th><b>Текущая цена</b></th>
+            <th><b>Текущая стоимость</b></th>
+            <th><b>Прирост</b></th>
+       </thead>
+        {% for stock in stocks %}
+            <tr>
+                <td><a href="stock_list/{{stock.ticker}}">{{stock.ticker}}</a></td>
+                <td>{{stock.amount}}</td>
+                <td>{{stock.price_avg}}</td>
+                <td>{{stock.current_price}}</td>
+                <td>{{stock.cost}}</td>
+                <td>{{stock.profit}}</td>
+            </tr>
+       {% endfor  %}
+   </table>
+
+
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <div id='myChart'></div>
+  <script>
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+    var myConfig = {
+  "type": "pie",
+  "title": {
+    "text": "Ценные бумаги"
+  },
+  "legend": {
+    "x": "75%",
+    "y": "25%",
+    "border-width": 1,
+    "border-color": "gray",
+    "border-radius": "5px",
+    "header": {
+      "text": "Legend",
+
+    },
+    "marker": {
+      "type": "circle"
+    },
+    "toggle-action": "remove",
+    "minimize": true,
+    "icon": {
+      "line-color": "#9999ff"
+    },
+    "max-items": 8,
+    "overflow": "scroll"
+  },
+  "plotarea": {
+    "margin-right": "30%",
+    "margin-top": "15%"
+  },
+  "plot": {
+    "value-box": {
+      "text": "%v",
+      "font-size": 12,
+      "font-family": "Georgia",
+      "font-weight": "normal",
+      "placement": "out",
+      "font-color": "gray",
+    },
+    "tooltip": {
+      "text": "%t: %v (%npv%)",
+      "font-color": "black",
+      "font-family": "Georgia",
+      "text-alpha": 1,
+      "background-color": "white",
+      "alpha": 0.7,
+      "border-width": 1,
+      "border-color": "#cccccc",
+      "line-style": "dotted",
+      "border-radius": "10px",
+      "padding": "10%",
+      "placement": "node:center"
+    },
+    "border-width": 1,
+    "border-color": "#cccccc",
+    "line-style": "dotted"
+  },
+  "series": {{ chart_data|safe }}
+
+};
+
+    zingchart.render({
+      id: 'myChart',
+      data: myConfig,
+      height: 400,
+      width: 600
+    });
+  </script>
+
+
+{% endblock  %}

@@ -1,0 +1,70 @@
+
+{% extends "base.html"%}
+
+{% block title %}Список транзакций{% endblock  %}
+
+{% block content %}
+    <H2>Список транзакций</H2>
+   <table class="table">
+       <thead>
+            <th><b>#</b></th>
+            <th><b>Символ</b></th>
+            <th><b>Дата</b></th>
+            <th><b>Операция</b></th>
+            <th><b>Количество</b></th>
+            <th><b>Цена транзакции</b></th>
+            <th><b>Комиссия</b></th>
+            <th><b>Стоимость</b></th>
+            <th><b>Валюта</b></th>
+       </thead>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{transaction.id}}</td>
+                <td>{{transaction.ticker}}</a> </td>
+                <td>{{transaction.date}}</td>
+                <td>{{transaction.operation_type}}</td>
+                <td>{{transaction.amount}}</td>
+                <td>{{transaction.price}}</td>
+                <td>{{transaction.commission}}</td>
+                <td>{{transaction.cost}}</td>
+                <td>{{transaction.currency}}</td>
+            </tr>
+       {% endfor  %}
+   </table>
+
+
+
+{% endblock  %}
+
+
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Userkjh
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,67 @@
+
+{% extends "base.html"%}
+
+{% block title %}{{stocks.ticker}}{% endblock  %}
+
+{% block content %}
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <h2>{{ticker}}</h2>
+    <p>Наименование - {{stocks.company_name}} <p>
+    <p>Тикер - {{ticker}} <p>
+    <p>Прибыль на акцию - {{stocks.eps}}</p>
+    <p>Дивиденды на акцию - {{stocks.dividend}}</p>
+
+     <div id="myChart"></div>
+          <script>
+
+            let myConfig = {
+              type: 'bar',
+              title: {
+                text: 'Дивиденды {{ticker}}',
+                //fontSize: 24,
+              },
+              legend: {
+                draggable: true,
+              },
+              scaleX: {
+                // Set scale label
+                label: { text: 'Days'
+                        },
+                // Convert text on scale indices
+                labels: {{date_data}}
+              },
+              scaleY: {
+                // Scale label with unicode character
+                label: { text: 'USD' },
+
+
+              },
+              plot: {
+                // Animation docs here:
+                // https://www.zingchart.com/docs/tutorials/styling/animation#effect
+                animation: {
+                  effect: 'ANIMATION_EXPAND_BOTTOM',
+                  method: 'ANIMATION_STRONG_EASE_OUT',
+                  sequence: 'ANIMATION_BY_NODE',
+                  speed: 275,
+                }
+              },
+              series: [
+                {
+                  // Plot 1 values, linear data
+                  values: {{dividend_data}},
+                  text: 'Week 1',
+                },
+
+              ]
+            };
+
+            // Render Method[3]
+            zingchart.render({
+              id: 'myChart',
+              data: myConfig,
+            });
+          </script>
+
+
+{% endblock  %}

@@ -1,0 +1,20 @@
+
+
+{% extends "base.html"%}
+
+{% block title %}Главная страница{% endblock  %}
+
+{% block content %}
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+{% load static %}
+<script src="{% static 'js/we.js' %}">
+
+<div id="container"></div>
+
+<button id="large">Large</button>
+<button id="small">Small</button>
+<button id="auto">Auto</button>
+
+{% endblock  %}

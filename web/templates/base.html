@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>{% block title%} {% endblock  %}</title>
+</head>
+<body>
+
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+      <h5 class="my-0 mr-md-auto font-weight-normal">EasyInvest</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/">Главная страница</a>
+            <a class="p-2 text-dark" href="/stock_list">Состав портфеля</a>
+            <a class="p-2 text-dark" href="/transaction">Транзакция</a>
+            <a class="p-2 text-dark" href="/dividend">Дивиденды</a>
+            <a class="p-2 text-dark" href="/javascript">Обучение</a>
+               <a class="p-2 text-dark" href="/post">Пост</a>
+      </nav>
+      <a class="btn btn-outline-primary" href="/post">Sign up</a>
+    </div>
+    {% block content%} {% endblock  %}
+</body>
+</html>

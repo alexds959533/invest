@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+
+{% block title %}Список транзакций{% endblock  %}
+
+{% block content %}
+    <H2>Список Дивидендлв</H2>
+   <table class="table">
+       <thead>
+            <th><b>Тикер</b></th>
+            <th><b>Дата отсечки</b></th>
+            <th><b>Дата выплаты</b></th>
+            <th><b>Количество</b></th>
+            <th><b>Сумма</b></th>
+       </thead>
+        {% for dividend in dividends %}
+            <tr>
+                <td>{{dividend.ticker}}</a> </td>
+                <td>{{dividend.dividend_date}}</td>
+                <td>{{dividend.payment_date}}</td>
+                <td>{{dividend.amount}}</td>
+                <td>{{dividend.total}}</td>
+            </tr>
+       {% endfor  %}
+   </table>
+
+
+
+{% endblock  %}
