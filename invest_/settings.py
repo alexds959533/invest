@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'invest_.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'EasyInvest',
-        'USER': 'postgres',
-        'PASSWORD': 'rootroot',
+        'NAME': 'postgres',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '5432'
     }
@@ -129,3 +129,5 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 
 STATIC_URL = '/static/'
+
+CELERY_BROKER_URL = 'amqp://localhost'

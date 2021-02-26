@@ -21,11 +21,8 @@ class Transactions(models.Model):
     def __str__(self):
         return 'ticker : {0}'.format(self.ticker)
 
-    class Meta:
-        db_table = 'transactions'
 
-
-class Dividend(models.Model):
+class Dividends(models.Model):
     ticker = models.CharField(max_length=10)
     dividend_date = models.DateField()
     dividend_value = models.FloatField()
@@ -37,12 +34,9 @@ class Dividend(models.Model):
     def __str__(self):
         return self.ticker + '-' + str(self.dividend_date)
 
-    class Meta:
-        db_table = 'dividends'
-
 
 class DividendPayments(models.Model):
-    dividend = models.OneToOneField(Dividend, on_delete=models.CASCADE,
+    dividend = models.OneToOneField(Dividends, on_delete=models.CASCADE,
                                     primary_key=True)
     amount = models.IntegerField('Количество', blank=True)
 

@@ -1,11 +1,12 @@
 import pandas as pd
 from django.http import HttpResponse
+from task.tasks import adding_task
 
 from django.shortcuts import render
 from django.db import connection
 from django.views.generic import TemplateView
 
-from web.models import Transactions, Dividend, OpenPosition, DividendPayments, StockTimeSeries, PortfolioCostChange
+from web.models import Transactions, Dividends, OpenPosition, DividendPayments, StockTimeSeries, PortfolioCostChange
 from .forms import TransactionsForm
 
 
@@ -16,24 +17,19 @@ class TransactionView(TemplateView):
 
     def post(self, request):
         form = TransactionsForm(request.POST)
-
         # Проверка валидности данных формы:
         if form.is_valid():
             form.save().save()
         return render(request, 'transaction_post.html')
 
-
-
-
-
-# поменять в будущем
-
 def index(request):
+    a = adding_task.delay(10, 80)
+    print(a)
     return render(request, 'main.html')
 
 
 def transaction(request):
-    query = 'SELECT *,amount * price as cost  FROM Transactions'
+    query = 'SELECT *,amount * price as cost  FROM web_Transactions'
     transactions = Transactions.objects.raw(query)
     return render(request, 'transaction.html', {'transactions':transactions})
 
@@ -60,8 +56,8 @@ def stock_list(request):
 
 
 def stock_describe(request, ticker):
-    query = f"SELECT id, payment_date  , dividend_value  FROM dividends where ticker = '{ticker}' and payment_date> '2010-01-01' order by payment_date"
-    dividends = Dividend.objects.raw(query)
+    query = f"SELECT id, payment_date  , dividend_value  FROM web_dividends where ticker = '{ticker}' and payment_date> '2010-01-01' order by payment_date"
+    dividends = Dividends.objects.raw(query)
     dividend_data = []
     date_data = []
     for i in dividends:
@@ -77,8 +73,8 @@ def dividend(request):
 
 
 def javascript(request):
-    query = f'SELECT id, payment_date    FROM Dividend  order by payment_date'
-    dividends = Dividend.objects.all()
+    query = f'SELECT id, payment_date    FROM Dividends  order by payment_date'
+    dividends = Dividends.objects.all()
     query = 'SELECT *, amount * price as cost  FROM Transactions'
     transactions = Transactions.objects.raw(query)
     dividend_data = []

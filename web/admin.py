@@ -1,5 +1,5 @@
 from django.contrib import admin
-from web.models import Transactions, Dividend, OpenPosition,\
+from web.models import Transactions, Dividends, OpenPosition,\
     DividendPayments, StockTimeSeries, PortfolioCostChange
 
 
@@ -10,7 +10,7 @@ class TransactionsAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Dividend)
+@admin.register(Dividends)
 class DividendAdmin(admin.ModelAdmin):
     list_display = ('ticker', 'dividend_date', 'dividend_value')
     list_filter = ('ticker',)

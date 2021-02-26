@@ -4,7 +4,7 @@ import json
 import requests
 
 from web.models import Transactions, DividendPayments, \
-    PortfolioCostChange, StockTimeSeries, Dividend
+    PortfolioCostChange, StockTimeSeries, Dividends
 
 
 class CostLoader:
@@ -26,7 +26,7 @@ class CostLoader:
             self.stock_contain = {}
 
     def get_dividend_income(self):
-        for div in Dividend.objects.filter(payment_date=self.date):
+        for div in Dividends.objects.filter(payment_date=self.date):
             amount = self.stock_contain.get(div.ticker)
             if amount:
                 dividend_date = div.dividend_date
